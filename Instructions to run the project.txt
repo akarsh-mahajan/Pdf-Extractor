@@ -1,8 +1,0 @@
-Steps to run python script and web application of Invoice data extraction
-
-*Ensure that you have python version 3.10 installed*
-
-1. Open any IDE of your choice, import the project code from github repository.
-2. Create a virtual environment using command 'pipenv shell'
-3. Install all dependencies using command 'pip install -r requirements.txt'
-4. To run the web app run command 'python manage.py runserver'
