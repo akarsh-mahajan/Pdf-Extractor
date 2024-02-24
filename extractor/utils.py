@@ -61,7 +61,7 @@ def ocr(image):
 
     for entry in ocr_text:
         coordinates, text, confidence = entry
-        y_coordinate = int((coordinates[0][1]/25))
+        y_coordinate = int((coordinates[0][1]/10))
         x_coordinate = int((coordinates[0][0]))
         if y_coordinate not in text_map:
             text_map[y_coordinate] = []
