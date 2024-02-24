@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
+easyocr = "*"
+"spire.pdf" = "*"
 
 [dev-packages]
 

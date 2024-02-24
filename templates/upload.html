@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload</title>
+    <title>Invoice Data Extracter</title>
 
     <style>
         body {
@@ -20,11 +20,19 @@
         h2 {
             text-align: center;
             color: #333;
+            margin-bottom: 30%;
+            position: absolute;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
             margin-bottom: 20%;
             position: absolute;
         }
 
         form {
+            position: absolute;
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
@@ -58,14 +66,26 @@
         button:hover {
             background-color: #2980b9;
         }
+
+        .error-message {
+            position: absolute;
+            color: #ff0000; /* Red color */
+            /* text-align: center; */
+            margin-top: 20%;
+        }
     </style>
 </head>
 <body>
-    <h2>Upload File</h2>
+    <h2>Invoice Data Extracter</h2>
+    <h3>Only .pdf / .jpg. / .png / .jpeg files can be uploaded</h3>
     <form method="post" enctype="multipart/form-data" action="{% url 'upload_file' %}">
         {% csrf_token %}
         <input type="file" name="file" accept="image/*, application/pdf" required>
         <button type="submit">Submit</button>
     </form>
+
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
 </body>
 </html>

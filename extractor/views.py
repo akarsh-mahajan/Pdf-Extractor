@@ -3,17 +3,24 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from .utils import extraction
+import os
 
 def upload_file(request):
     if request.method == 'POST':
-        # If the form is submitted
-        uploaded_file = request.FILES['file']
-        extracted_data = extraction(uploaded_file)
-        # Save the file to a specific location (change the location as needed)
-        fs = FileSystemStorage()
-        # fs.save(uploaded_file.name, uploaded_file)
-        # Redirect to a success page or perform additional actions
-        return render(request, 'result.html', {'extracted_data': extracted_data})
+        try:
+            uploaded_file = request.FILES['file']
+            print(upload_file)
+            
+            fs = FileSystemStorage()
+            fs.save(uploaded_file.name, uploaded_file)
+            file_path = uploaded_file.name
+            html_content = extraction(file_path)
+            os.remove(file_path)
+            return render(request, 'result.html', {'html_content': html_content})
+        
+        except Exception as e:
+            error_message = "Either provided document is not invoice or it is not of specified type"
+            return render(request, 'upload.html', {'error_message': error_message})
+
     else:
-        # If the form is not submitted, display the form
         return render(request, 'upload.html')
